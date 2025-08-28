@@ -1,5 +1,5 @@
 <?php
-// ---------- Step 1: Create an array of 100 Tamil movies ----------
+
 $movies = [
     ["title" => "Parasakthi", "director" => "Krishnan-Panju", "hero" => "Sivaji Ganesan", "year" => 1952],
     ["title" => "Thillana Mohanambal", "director" => "A. P. Nagarajan", "hero" => "Sivaji Ganesan", "year" => 1968],
@@ -112,20 +112,20 @@ $movies = [
     ["title" => "Vidaa Muyarchi", "director" => "Magizh Thirumeni", "hero" => "Ajith Kumar", "year" => 2025],
 ];
 
-// ---------- Step 2: Get the search keyword from user ----------
+//Get the search keyword from user
 $search = "";
 
 if (isset($_GET['search'])) {
     $search = strtolower($_GET['search']);  // convert to lowercase for case-insensitive search
 }
 
-// ---------- Step 3: Search movies ----------
+//Search movies
 $results = [];
 if ($search != "") {
     foreach ($movies as $movie) {
-        // check if search word matches any field: title, hero, director, year
+        // check key words
         if (
-            strpos(strtolower($movie["title"]), $search) !== false || // changed "name" to "title"
+            strpos(strtolower($movie["title"]), $search) !== false || 
             strpos(strtolower($movie["hero"]), $search) !== false ||
             strpos(strtolower($movie["director"]), $search) !== false ||
             strpos(strtolower((string)$movie["year"]), $search) !== false
@@ -157,13 +157,13 @@ if ($search != "") {
 </head>
 <body>
     <h1 class="text-center">Search Tamil Movies</h1>
-    <!-- Step 4: Search Form -->
+    <!-- Search Form -->
     <form method="get" class="text-center mb-4">
         <input type="text" name="search" placeholder="Enter movie, hero, director, or year" value="<?php echo htmlspecialchars($search); ?>">
         <input type="submit" value="Search">
     </form>
 
-    <!-- Step 5: Show Results -->
+    <!--Show Results -->
     <h2>Results:</h2>
     <?php if ($search != "" && empty($results)) { ?>
         <p>No movies found for "<b><?php echo htmlspecialchars($search); ?></b>"</p>
